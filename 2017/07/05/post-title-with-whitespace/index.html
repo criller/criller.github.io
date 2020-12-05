@@ -36,21 +36,6 @@
 
   <!-- link -->
   
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css">
-
-  
-  
-
-  
-
-  
-
-  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
-  
-
-  
 
   <!-- import link -->
   
@@ -59,10 +44,14 @@
   
 
   
-  
     
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/first.css">
 
+  
+
+  
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
   
 
   <script id="loadcss"></script>
@@ -1274,6 +1263,7 @@
   <div>
     <script>
 window.volantis={};
+window.volantis.loadcss=document.getElementById("loadcss");
 /********************脚本懒加载函数********************************/
 function loadScript(src, cb) {
 var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
@@ -1342,6 +1332,14 @@ var loadCSS = function( href, before, media, attributes ){
 	onloadcssdefined( loadCB );
 	return ss;
 };
+</script>
+<script>
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
+  
+  
+  
+  
 </script>
 <!-- required -->
 
@@ -1495,18 +1493,14 @@ var loadCSS = function( href, before, media, attributes ){
   let APlayerController = new Object();
   APlayerController.id = '3175833810';  // 设定全局音乐播放ID
   APlayerController.volume = '0.7';
+  loadCSS("https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css", window.volantis.loadcss);
+
+  loadScript("https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js")
+
+  loadScript("https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js")
+
+
 </script>
-
-  
-<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
-
-
-  
-<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
-
-
-
-
 
 
 
@@ -1590,16 +1584,8 @@ var loadCSS = function( href, before, media, attributes ){
 
 
   
-<script src="/js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-volantis@4.1.6/source/js/app.min.js"></script>
 
-
-
-
-  
-    
-<script src="/js/search.js"></script>
-
-  
 
 
 <!-- optional -->
@@ -1607,14 +1593,24 @@ var loadCSS = function( href, before, media, attributes ){
   <script>
 const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
 const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
-(function ($) {
+
+$('.input.u-search-input').one('focus',function(){
+	
+		loadScript('https://cdn.jsdelivr.net/npm/hexo-theme-volantis@4.1.6/source/js/search/hexo.min.js',setSearchService);
+	
+})
+
+function listenSearch(){
   
     customSearch = new HexoSearch({
       imagePath: SearchServiceimagePath
     });
   
-})(jQuery);
-
+}
+function setSearchService() {
+	listenSearch();
+	
+}
 </script>
 
 
@@ -1934,11 +1930,6 @@ document.addEventListener("pjax:success", listennSidebarTOC);
 
 <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
 
-<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
-
-<div class="pjax-animate">
-  
-</div>
 
 <script>
     var pjax;
@@ -1988,19 +1979,20 @@ document.addEventListener("pjax:success", listennSidebarTOC);
       $(document).unbind('scroll');
       $(document).unbind('click');
       $('body').unbind('click');
-      window.ShowLoading();
+	  
     });
 
     document.addEventListener('pjax:complete', function () {
       // 关于百度统计对 SPA 页面的处理：
       // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
       // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
-      // 
+       
 
       // 关于谷歌统计对 SPA 页面的处理：
       // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
       // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
       
+	 
 
       $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
       $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
@@ -2029,11 +2021,11 @@ document.addEventListener("pjax:success", listennSidebarTOC);
       } catch (e) {
         console.log(e);
       }
-      window.HideLoading();
+	  
     });
 
     document.addEventListener('pjax:error', function (e) {
-      window.HideLoading();
+	  
       window.location.href = e.triggerElement.href;
     });
 </script>
