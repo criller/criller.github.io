@@ -19,7 +19,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>testblog - criller博客-追求永无止境</title>
+  <title>项目中缓存是如何使用的?为什么要用缓存?缓存使用不当会造成什么后果? - criller博客-追求永无止境</title>
+  
+    <meta name="keywords" content="求职面试,redis">
   
 
   
@@ -387,7 +389,7 @@
     
     
       <h1 class="title">
-        testblog
+        项目中缓存是如何使用的?为什么要用缓存?缓存使用不当会造成什么后果?
       </h1>
       <div class='new-meta-box'>
         
@@ -404,11 +406,21 @@
         
           
             
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/redis/">redis</a>
+    </a>
+  </div>
+
 
           
         
           
             
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%B1%82%E8%81%8C%E9%9D%A2%E8%AF%95/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>求职面试</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/redis/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>redis</p></a></div>
+
 
           
         
@@ -427,7 +439,7 @@
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="testblog" data-path="/test/testblog/">
+      <div id="lc-pv" data-title="项目中缓存是如何使用的?为什么要用缓存?缓存使用不当会造成什么后果?" data-path="/reids/c1/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -445,7 +457,33 @@
 
 
   
-  
+  <h2 id="面试官心理分析"><a href="#面试官心理分析" class="headerlink" title="面试官心理分析"></a>面试官心理分析</h2><p>这个问题，互联网公司必问，要是一个人连缓存都不太清楚，那确实比较尴尬。</p>
+<p>要是问到缓存，肯定先问问</p>
+<ul>
+<li>你项目哪里用了缓存？</li>
+<li>为啥要用？</li>
+<li>不用行不行？</li>
+<li>如果用了以后可能会有什么不良后果？</li>
+</ul>
+<p>这就是看看你对缓存这个东西背后有没有思考，如果你就是傻乎乎的瞎用，没法给面试官一个合理的解答，那面试官对你印象肯定不太好，觉得你平时思考太少，就知道干活儿。</p>
+<h2 id="面试题剖析"><a href="#面试题剖析" class="headerlink" title="面试题剖析"></a>面试题剖析</h2><h3 id="项目中缓存是如何使用的？"><a href="#项目中缓存是如何使用的？" class="headerlink" title="项目中缓存是如何使用的？"></a>项目中缓存是如何使用的？</h3><p>这个，需要结合自己项目的业务来分析。</p>
+<h3 id="为什么要用缓存"><a href="#为什么要用缓存" class="headerlink" title="为什么要用缓存"></a>为什么要用缓存</h3><p>用缓存，主要有两个用途：高性能、高并发</p>
+<h4 id="高性能"><a href="#高性能" class="headerlink" title="高性能"></a>高性能</h4><p>假设这么个场景，你有个操作，一个请求过来，你各种乱七八糟操作MySQL，半天查出来一个结果，耗时600ms。但是这个结果可能接下来几个小时都不会变了，或者变了也可以不用立即反馈给用户。那么此时怎么办？</p>
+<p>缓存啊，折腾600ms查出来的结果，扔缓存里，一个key对应一个value，下次再有人查，别走MySQL折腾600ms了，直接从缓存里通过一个key查出来一个value，2ms搞定。性能提升300倍。</p>
+<p>就是对于一些需要复杂操作耗时查出来的结果，且确定后面不怎么变化，但是有很多请求，那么直接将查询出来的结果放在缓存中，后面直接读缓存就好。</p>
+<h4 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h4><p>Mysql这么重的数据库，压根设计不是让你玩高并发的，虽然也可以玩，但是天然支持不好。MySQL单机支持到2000QPS也就开始报警了。所以要是你有个系统，高峰期一秒钟过来的请求有1W，那一个MySQL单机绝对会挂。你这个时候就只能上缓存，把更多数据放缓存中。缓存功能简单，说白了就是key-value式操作，单机支撑的并发量轻松一秒几万甚至十几万，支撑高并发so easy。单机承载并发量是MySQL单机的几十倍。</p>
+<blockquote>
+<p>缓存是走内存的，内存天然就支撑高并发</p>
+</blockquote>
+<h3 id="用了缓存之后会有什么不良后果？"><a href="#用了缓存之后会有什么不良后果？" class="headerlink" title="用了缓存之后会有什么不良后果？"></a>用了缓存之后会有什么不良后果？</h3><p>常见的缓存问题有以下几个：</p>
+<ul>
+<li>缓存与数据库双写不一致问题</li>
+<li>缓存雪崩</li>
+<li>缓存穿透</li>
+<li>缓存并发竞争</li>
+</ul>
+<p>这些后面的文章再详细说明。</p>
+
   
   
     
@@ -475,11 +513,21 @@
       
         
           
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/redis/">redis</a>
+    </a>
+  </div>
+
 
         
       
         
           
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%B1%82%E8%81%8C%E9%9D%A2%E8%AF%95/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>求职面试</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/redis/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>redis</p></a></div>
+
 
         
       
@@ -491,7 +539,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://criller.github.io/test/testblog/&title=testblog - criller博客-追求永无止境&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://criller.github.io/reids/c1/&title=项目中缓存是如何使用的?为什么要用缓存?缓存使用不当会造成什么后果? - criller博客-追求永无止境&summary="
           
           >
           
@@ -503,7 +551,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://criller.github.io/test/testblog/&title=testblog - criller博客-追求永无止境&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://criller.github.io/reids/c1/&title=项目中缓存是如何使用的?为什么要用缓存?缓存使用不当会造成什么后果? - criller博客-追求永无止境&summary="
           
           >
           
@@ -515,7 +563,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://criller.github.io/test/testblog/&title=testblog - criller博客-追求永无止境&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://criller.github.io/reids/c1/&title=项目中缓存是如何使用的?为什么要用缓存?缓存使用不当会造成什么后果? - criller博客-追求永无止境&summary="
           
           >
           
@@ -545,33 +593,24 @@
   
     <div class="prev-next">
       
-        <a class='prev' href='/test/index/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>abtest</p>
-          <p class='content'></p>
+        <a class='prev' href='/reids/c2/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>redis 和 memcached 有什么区别?redis 的线程模型是什 么?为什么 redis 单线程却能支撑高并发?</p>
+          <p class='content'>面试官心理分析这个是问Redis的时候，最基本的问题了吧，Redis最基本的一个内部原理和特点，就是Redis实际上是一个单线程工作模型，你要是这个都不知道，那后面玩Redis的时候，出了问题岂...</p>
         </a>
       
       
-        <a class='next' href='/2020-12-06-spring-aop/'>
-          <p class='title'>spring-aop<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'></p>
+        <a class='next' href='/jrebel-active/'>
+          <p class='title'>JRebel安装与激活<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>
+JRebel支持热部署，极大提高了开发效率，每次代码改动，不需要重启服务
+但是修改配置文件或者pom.xml，热部署不生效
+
+安装JRebel插件Preferences -&gt; Plugi...</p>
         </a>
       
     </div>
   
 </article>
-
-
-  
-
-  <article class="post white-box reveal shadow" id="comments">
-    <p ct><i class='fas fa-comments'></i> 评论</p>
-    
-    <div id="valine_container" class="valine_thread">
-  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-</div>
-
-  </article>
-
 
 
 
@@ -585,6 +624,20 @@
     
 
 
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E5%AE%98%E5%BF%83%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-text">面试官心理分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98%E5%89%96%E6%9E%90"><span class="toc-text">面试题剖析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%BC%93%E5%AD%98%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%9F"><span class="toc-text">项目中缓存是如何使用的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E7%BC%93%E5%AD%98"><span class="toc-text">为什么要用缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD"><span class="toc-text">高性能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91"><span class="toc-text">高并发</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E4%BA%86%E7%BC%93%E5%AD%98%E4%B9%8B%E5%90%8E%E4%BC%9A%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E8%89%AF%E5%90%8E%E6%9E%9C%EF%BC%9F"><span class="toc-text">用了缓存之后会有什么不良后果？</span></a></li></ol></li></ol>
+    </div>
+  </section>
 
 
   
@@ -602,7 +655,7 @@
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="testblog";
+  pdata.postTitle="项目中缓存是如何使用的?为什么要用缓存?缓存使用不当会造成什么后果?";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
 
