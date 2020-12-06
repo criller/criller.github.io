@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-CN">
 <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.1.6'>
   <meta charset="utf-8">
   <!-- SEO相关 -->
@@ -61,7 +61,7 @@
 <body>
   
 
-<header id="l_header" class="l_header always blur "  >
+<header id="l_header" class="l_header always blur show"  >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -816,7 +816,7 @@
     <div id="l_cover">
   
     
-        <div id="half" class='cover-wrapper post dock' style="display: ;">
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -968,7 +968,7 @@
   
     <div class='div-ori-link'>
       <a class='ori-link' target="_blank" rel="noopener" href='https://xaoxuu.com/blog/2017-07-05-hexo-blog/'>
-        Read Original
+        去源站阅读
       </a>
     </div>
   
@@ -977,21 +977,6 @@
     <div class='footer'>
       
       
-      
-        <div class='copyright'>
-          <blockquote>
-            
-              
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
-
-              
-            
-              
-                <p>本文永久链接是：<a href=http://example.com/2017/07/05/post-title-with-whitespace/>http://example.com/2017/07/05/post-title-with-whitespace/</a></p>
-              
-            
-          </blockquote>
-        </div>
       
       
     </div>
@@ -1004,12 +989,24 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-12-05T23:02:04+08:00">
+          <div class="new-meta-item date">
   <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年12月5日</p>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2017年7月5日</p>
   </a>
 </div>
+
+        
+      
+        
+          
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/Dev/">Dev</a><span class="sep"></span><a class="category-link" href="/categories/Dev/Hexo/">Hexo</a>
+    </a>
+  </div>
+
 
         
       
@@ -1083,16 +1080,10 @@
   
     <div class="prev-next">
       
-        <a class='prev' href='/2020/12/05/hello-world/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Hello World</p>
+      
+        <a class='next' href='/2016/12/05/hello-world/'>
+          <p class='title'>Hello World<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
           <p class='content'>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any ...</p>
-        </a>
-      
-      
-        <a class='next' href='/2016/12/05/2020-12-05-spring%E5%85%A5%E9%97%A8/'>
-          <p class='title'>spring入门<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>springspringmvc这是个测试
-</p>
         </a>
       
     </div>
@@ -1147,7 +1138,7 @@
 
   var l_header=document.getElementById("l_header");
   
-  l_header.classList.remove("show");
+  l_header.classList.add("show");
   
 </script>
 
@@ -1243,7 +1234,7 @@
       
     
       
-        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
