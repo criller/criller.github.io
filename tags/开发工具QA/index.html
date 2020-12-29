@@ -21,7 +21,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>归档：2017/7 - criller博客-追求永无止境</title>
+  <title>标签：开发工具QA - criller博客-追求永无止境</title>
   
 
   
@@ -59,7 +59,7 @@
 <body>
   
 
-<header id="l_header" class="l_header always blur "  >
+<header id="l_header" class="l_header always blur show"  >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -342,7 +342,7 @@
     <div id="l_cover">
   
     
-        <div id="half" class='cover-wrapper  dock' style="display: ;">
+        <div id="full" class='cover-wrapper  dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -377,9 +377,11 @@
       <div class='body-wrapper' id="pjax-container">
         
 
+
 <div class='l_main'>
-	
-		
+  
+    
+      
   <section class="post-list">
     
       
@@ -399,14 +401,20 @@
   
     
     <h2 class="article-title" >
-      <a target="_blank" rel="noopener" href="https://xaoxuu.com/blog/2017-07-05-hexo-blog/">
-        [转]如何搭建基于Hexo的独立博客
+      <a href="/tools/idea-1/">
+        Intellij IDEA运行报Command line is too long解法
       </a>
     </h2>
   
   <div class='md'>
     
-      <p>如何搭建基于Hexo的独立博客</p>
+      
+        点击idea运行按钮，报错如下：
+1Error running &#39;ServiceStarter&#39;: Command line is too long. Shorten command line for ServiceStarter or also for Application default configuration.
+
+解决方法：
+修改项目下 .idea\workspa...
+      
     
   </div>
   
@@ -416,13 +424,16 @@
           
           <a class='avatar' href='/about'><img src='/images/author.jpg'></a>
         
-        <time>2017-07-05</time>
+        <time>2020-12-29</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/idea/">idea</a>
         
       </div>
       
         <div>
-          <a class='readmore' target="_blank" rel="noopener" href='https://xaoxuu.com/blog/2017-07-05-hexo-blog/'>
-            去源站阅读
+          <a class='readmore' href='/tools/idea-1/'>
+            阅读全文
           </a>
         </div>
       
@@ -441,7 +452,8 @@
   
 
 
-	
+    
+  
 </div>
 <aside class='l_side'>
   
@@ -723,7 +735,7 @@
 
   var l_header=document.getElementById("l_header");
   
-  l_header.classList.remove("show");
+  l_header.classList.add("show");
   
 </script>
 

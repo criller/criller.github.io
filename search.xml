@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Intellij IDEA运行报Command line is too long解法</title>
+      <link href="tools/idea-1/"/>
+      <url>tools/idea-1/</url>
+      
+        <content type="html"><![CDATA[<p>点击idea运行按钮，报错如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error running &#39;ServiceStarter&#39;: Command line is too long. Shorten command line for ServiceStarter or also for Application default configuration.</span><br></pre></td></tr></table></figure><p>解决方法：</p><p>修改项目下 <code>.idea\workspace.xml</code>，找到标签 <code>&lt;component name=&quot;PropertiesComponent&quot;&gt; </code>， 在标签里加一行 <code>&lt;property name=&quot;dynamic.classpath&quot; value=&quot;true&quot; /&gt;</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> idea </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 开发工具QA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>redis 和 memcached 有什么区别?redis 的线程模型是什 么?为什么 redis 单线程却能支撑高并发?</title>
       <link href="reids/c2/"/>
       <url>reids/c2/</url>
